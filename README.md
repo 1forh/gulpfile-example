@@ -55,29 +55,26 @@ All Gulp task configuration is located in `./gulp/config.json`. You can control 
 		"last 2 versions",
 		"ie >= 9"
 	],
-	"sources": {
-		"sass": "./test/assets/styles/**/*.scss",
-		"scripts": [
-			"./test/assets/scripts/test.js",
-			"./test/assets/scripts/main.js"
-		],
-		"fonts": "./test/assets/fonts/**"
-	},
-	"destinations": {
-		"sass": "./test/dist/",
-		"scripts": "./test/dist/",
-		"fonts": "./test/dist/fonts/"
-	},
-	"modules": {
-		"sass": [
+	"sass": {
+		"source": "./test/assets/styles/**/*.scss",
+		"destination": "./test/dist/",
+		"modules": [
 			"node_modules/slick-carousel/slick",
 			"node_modules/bootstrap/scss"
-		],
-		"scripts": [
+		]
+	},
+	"scripts": {
+		"source": "./test/assets/scripts/**/*.js",
+		"destination": "./test/dist/",
+		"modules": [
 			"node_modules/bootstrap/dist/js/bootstrap.min.js",
 			"node_modules/slick-carousel/slick/slick.js"
-		],
-		"fonts": [
+		]
+	},
+	"fonts": {
+		"source": "./test/assets/fonts/**",
+		"destination": "./test/dist/fonts/",
+		"modules": [
 			"node_modules/slick-carousel/slick/fonts/**"
 		]
 	}
