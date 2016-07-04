@@ -1,9 +1,8 @@
 /**
  * All tasks are imported from ./gulp/index.js
- * Gulp task configuation in ./gulp/config.json
+ * Gulp task configuation in ./gulp/config.js
  */
 
-// Require Gulp module
 var gulp = require('gulp');
 var config = require('./gulp/config');
 

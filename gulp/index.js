@@ -6,6 +6,7 @@ module.exports = function(gulp, config){
 	// Asset development tasks
 	require('./tasks/development/sass')(gulp, config);
 	require('./tasks/development/scripts')(gulp, config);
+	require('./tasks/development/images')(gulp, config);
 	require('./tasks/development/fonts')(gulp, config);
 
 	// Utility tasks

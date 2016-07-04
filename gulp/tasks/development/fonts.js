@@ -4,9 +4,7 @@ var addsrc = require('gulp-add-src');
 module.exports = function(gulp, config) {
 	'use strict';
 
-	if(config.fonts.modules === undefined) {
-		config.fonts.modules = '';
-	}
+	config.check_modules('fonts');
 
 	gulp.task('fonts', function() {
 		return gulp.src(config.fonts.source)

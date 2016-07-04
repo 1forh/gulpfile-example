@@ -1,3 +1,5 @@
+/*jshint globalstrict: true*/
+
 (function test() {
 	const foo = [1, 2];
 	const bar = foo;

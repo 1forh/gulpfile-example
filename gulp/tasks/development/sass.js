@@ -12,9 +12,7 @@ var browserSync = require('browser-sync');
 module.exports = function(gulp, config) {
 	'use strict';
 
-	if(config.sass.modules === undefined) {
-		config.sass.modules = '';
-	}
+	config.check_modules('sass');
 
 	gulp.task('sass', function() {
 		return gulp.src(config.sass.source)

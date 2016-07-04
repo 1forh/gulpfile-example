@@ -41,10 +41,10 @@ All Gulp tasks are located in `./gulp/tasks`
 	- [Browsersync](https://www.browsersync.io/docs/gulp): Synchronizes URLs, interactions and code changes across multiple devices.
 
 ### Gulp task configuration
-All Gulp task configuration is located in `./gulp/config.json`. You can control all gulp tasks using this configuration file.
+All Gulp task configuration is located in `./gulp/config.js`. You can control all gulp tasks using this configuration file.
 
-### Example `config.json`
-```json
+### Example `config.js`
+```javascript
 {
 	"proxy": "http://example.dev",
 	"minify": true,

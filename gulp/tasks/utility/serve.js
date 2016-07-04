@@ -10,5 +10,7 @@ module.exports = function(gulp, config) {
 
 		gulp.watch(config.sass.source, ['sass']);
 		gulp.watch(config.scripts.source, ['scripts', browserSync.reload]);
+		gulp.watch(config.images.source, ['images', browserSync.reload]);
+		gulp.watch(config.fonts.source, ['fonts', browserSync.reload]);
 	});
 };
