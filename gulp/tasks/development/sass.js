@@ -12,25 +12,28 @@ var browserSync = require('browser-sync');
 module.exports = function(gulp, config) {
 	'use strict';
 
+	if(config.sass.modules === undefined) {
+		config.sass.modules = '';
+	}
+
 	gulp.task('sass', function() {
-		return gulp.src(config.sources.sass)
+		return gulp.src(config.sass.source)
 			.pipe(plumber())
-			.pipe(changed(config.destinations.sass))
+			.pipe(changed(config.sass.destination))
 			.pipe(gulpif(config.sourcemaps === true, sourcemaps.init()))
 			// Compiles synchronously
 			.pipe(sass.sync({
-				includePaths: config.modules.sass
+				includePaths: config.sass.modules
 			})
 			.on('error', sass.logError))
 			.pipe(autoprefixer({
-				browsers: config.browsers,
-				cascade: false
+				browsers: config.browsers
 			}))
 			.pipe(concat('main.css'))
 			.pipe(gulpif(config.minify === true, cssnano()))
 			.pipe(gulpif(config.minify === true, rename({suffix: '.min'})))
 			.pipe(gulpif(config.sourcemaps === true, sourcemaps.write('.')))
-			.pipe(gulp.dest(config.destinations.sass))
+			.pipe(gulp.dest(config.sass.destination))
 			.pipe(browserSync.stream());
 	});
 };

@@ -8,7 +8,7 @@ module.exports = function(gulp, config) {
 			proxy: config.proxy
 		});
 
-		gulp.watch(config.sources.sass, ['sass']);
-		gulp.watch(config.sources.scripts, ['scripts', browserSync.reload]);
+		gulp.watch(config.sass.source, ['sass']);
+		gulp.watch(config.scripts.source, ['scripts', browserSync.reload]);
 	});
 };

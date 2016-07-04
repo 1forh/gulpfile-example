@@ -13,19 +13,23 @@ var rename = require('gulp-rename');
 module.exports = function(gulp, config) {
 	'use strict';
 
+	if(config.scripts.modules === undefined) {
+		config.scripts.modules = '';
+	}
+
 	gulp.task('scripts', function() {
-		return gulp.src(config.sources.scripts)
+		return gulp.src(config.scripts.source)
 			.pipe(plumber())
 			.pipe(gulpif(config.sourcemaps === true, sourcemaps.init()))
-			.pipe(changed(config.destinations.scripts))
+			.pipe(changed(config.scripts.destination))
 			.pipe(gulpif(config.lint === true, jshint()))
 			.pipe(gulpif(config.lint === true, jshint.reporter(stylish)))
-			.pipe(gulpif(config.ecmascript === 6, babel({"presets": "es2015"})))
-			.pipe(addsrc(config.modules.scripts))
+			.pipe(gulpif(config.ecmascript === 6, babel({'presets': 'es2015'})))
+			.pipe(addsrc(config.scripts.modules))
 			.pipe(concat('main.js'))
 			.pipe(gulpif(config.minify === true, uglify()))
 			.pipe(gulpif(config.minify === true, rename({suffix: '.min'})))
 			.pipe(gulpif(config.sourcemaps === true, sourcemaps.write('.')))
-			.pipe(gulp.dest(config.destinations.scripts));
+			.pipe(gulp.dest(config.scripts.destination));
 	});
 };
