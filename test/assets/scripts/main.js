@@ -1,6 +1,6 @@
-/*jshint globalstrict: true*/
-
 (function main() {
+	'use strict';
+	
 	const foo = 'Hello World!';
 
 	alert(foo);

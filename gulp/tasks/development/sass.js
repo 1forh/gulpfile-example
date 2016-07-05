@@ -15,7 +15,7 @@ module.exports = function(gulp, config) {
 	config.check_modules('sass');
 
 	gulp.task('sass', function() {
-		return gulp.src(config.sass.source)
+		return gulp.src(config.sass.sources)
 			.pipe(plumber())
 			.pipe(changed(config.sass.destination))
 			.pipe(gulpif(config.sourcemaps === true, sourcemaps.init()))

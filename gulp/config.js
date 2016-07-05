@@ -1,5 +1,4 @@
 module.exports = {
-	path: './test/assets',
 	minify: true,
 	sourcemaps: true,
 	lintjs: true,
@@ -9,26 +8,26 @@ module.exports = {
 		'ie >= 9'
 	],
 	sass: {
-		source: './test/assets/styles/**/*.scss',
+		sources: './test/assets/styles/**/*.scss',
 		destination: './test/dist/',
 		modules: [
-			"node_modules/slick-carousel/slick",
-			"node_modules/bootstrap/scss"
+			'node_modules/slick-carousel/slick',
+			'node_modules/bootstrap/scss'
 		]
 	},
 	scripts: {
-		source: './test/assets/scripts/**/*.js',
+		sources: './test/assets/scripts/**/*.js',
 		destination: './test/dist/',
 		modules: [
-			"node_modules/bootstrap/dist/js/bootstrap.min.js",
-			"node_modules/slick-carousel/slick/slick.js"
+			'node_modules/bootstrap/dist/js/bootstrap.min.js',
+			'node_modules/slick-carousel/slick/slick.js'
 		]
 	},
 	fonts: {
 		source: './test/assets/fonts/**',
 		destination: './test/dist/fonts/',
 		modules: [
-			"node_modules/slick-carousel/slick/fonts/**"
+			'node_modules/slick-carousel/slick/fonts/**'
 		]
 	},
 	images: {

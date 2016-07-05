@@ -1,6 +1,6 @@
-/*jshint globalstrict: true*/
-
 (function test() {
+	'use strict';
+	
 	const foo = [1, 2];
 	const bar = foo;
 

@@ -12,6 +12,7 @@ module.exports = function(gulp, config){
 	// Utility tasks
 	require('./tasks/utility/build')(gulp, config);
 	require('./tasks/utility/serve')(gulp, config);
+	require('./tasks/utility/lint')(gulp, config);
 	require('./tasks/utility/clean')(gulp, config);
 
 	return gulp;

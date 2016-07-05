@@ -4,6 +4,6 @@ module.exports = function(gulp, config) {
   'use strict';
 
   gulp.task('build', function(done) {
-   sequence('clean', ['sass', 'scripts', 'fonts', 'images'], done);
+   sequence('clean', 'lint', ['sass', 'scripts', 'fonts', 'images'], done);
   });
 };
