@@ -8,30 +8,44 @@ const rimraf = require('rimraf');
 const plumber = require('gulp-plumber');
 const browserSync = require('browser-sync').create();
 
-const styles = function styles() {
-	return gulp.src('./test/assets/styles/**/*.scss')
+const config = {
+	styles: {
+		source: './test/assets/styles/**/*.scss',
+		destination: './dist/css',
+		browsers: ['last 2 versions', 'ie >= 9']
+	},
+	browserSync: {
+		port: 5000,
+		server: './src'
+	},
+	clean: {
+		directory: './dist'
+	}
+};
+
+const styles = () =>
+	gulp.src(config.styles.source)
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
-			browsers: ['last 2 versions', 'ie >= 9']
+			browsers: config.styles.browsers
 		}))
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('./dist/css'))
+		.pipe(gulp.dest(config.styles.destination))
 		.pipe(browserSync.stream());
+
+const clean = (error) => {
+	rimraf(config.clean.directory, error);
 };
 
-const clean = function clean(error) {
-	rimraf('./dist', error);
-};
-
-const serve = function serve() {
+const serve = () => {
 	browserSync.init({
-		port: 5000,
-		server: './src'
+		port: config.browserSync.port,
+		server: config.browserSync.server
 	});
 
-	gulp.watch('./test/assets/styles/**/*.scss', ['styles']);
+	gulp.watch(config.styles.source, ['styles']);
 };
 
 gulp.task('clean', clean);
