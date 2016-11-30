@@ -6,7 +6,9 @@
   "license": "MIT",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp",
+    "styles": "gulp styles",
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",
