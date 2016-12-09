@@ -1,6 +1,6 @@
 # [gulpfile-example](https://github.com/1forh/gulpfile-example)
 
-Example of an advanced Gulp workflow.
+Example ES6 Gulpfile
 
 ## Requirements
 
