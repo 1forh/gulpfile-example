@@ -1,17 +1,16 @@
 export const config = {
+	destination: './dist',
 	styles: {
-		sources: './test/assets/styles/**/*.scss',
-		output: {
-			destination: './dist'
-		},
+		source: './test/assets/styles/**/*.scss',
 		browsers: ['last 2 versions', 'ie >= 9']
 	},
 	scripts: {
-		sources: './test/assets/scripts/**/*.js',
-		output: {
-			destination: './dist',
-			filename: 'main.js',
-		},
+		source: [
+			'./test/assets/scripts/**/*.js'
+		],
+		modules: [
+			'node_modules/jquery/dist/jquery.js'
+		],
 		babel: {
 			compile: true,
 			presets: ['es2015']
@@ -25,9 +24,6 @@ export const config = {
 	},
 	browserSync: {
 		port: 5000,
-		server: './src'
-	},
-	clean: {
-		directory: './dist'
+		server: './test/assets'
 	}
 };

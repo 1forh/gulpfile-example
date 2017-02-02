@@ -19,7 +19,7 @@ import { config } from './gulpfile.config.babel';
 const argv = yargs.argv;
 
 gulp.task('styles', () => {
-	return gulp.src(config.styles.sources)
+	return gulp.src(config.styles.source)
 		.pipe(plumber())
 		.pipe(gulpif(!argv.prod, sourcemaps.init()))
 		.pipe(sass().on('error', sass.logError))
@@ -28,30 +28,40 @@ gulp.task('styles', () => {
 		}))
 		.pipe(gulpif(argv.prod, cssnano()))
 		.pipe(gulpif(!argv.prod, sourcemaps.write('.')))
-		.pipe(gulp.dest(config.styles.output.destination))
+		.pipe(gulp.dest(config.destination))
 		.pipe(browserSync.stream());
 });
 
 gulp.task('scripts', ['lint'], () => {
-	return gulp.src(config.scripts.sources)
+	return gulp.src(config.scripts.source)
 		.pipe(plumber())
 		.pipe(gulpif(!argv.prod, sourcemaps.init()))
-		.pipe(concat(config.scripts.output.filename))
+		.pipe(concat('bundle.js'))
 		.pipe(gulpif(config.scripts.babel.compile === true, babel(config.babel)))
 		.pipe(gulpif(argv.prod, uglify()))
 		.pipe(gulpif(!argv.prod, sourcemaps.write('.')))
-		.pipe(gulp.dest(config.scripts.output.destination));
+		.pipe(gulp.dest(config.destination));
+});
+
+gulp.task('modules', () => {
+	return gulp.src(config.scripts.modules)
+		.pipe(plumber())
+		.pipe(gulpif(!argv.prod, sourcemaps.init()))
+		.pipe(concat('vendor.js'))
+		.pipe(gulpif(argv.prod, uglify()))
+		.pipe(gulpif(!argv.prod, sourcemaps.write('.')))
+		.pipe(gulp.dest(config.destination));
 });
 
 gulp.task('lint', () => {
-	return gulp.src(config.scripts.sources)
+	return gulp.src(config.scripts.source)
 		.pipe(plumber())
 		.pipe(jshint(config.scripts.jshint))
 		.pipe(jshint.reporter(stylish));
 });
 
 gulp.task('clean', error => {
-	rimraf(config.clean.directory, error);
+	rimraf(config.destination, error);
 });
 
 gulp.task('serve', ['build'], () => {
@@ -60,12 +70,13 @@ gulp.task('serve', ['build'], () => {
 		server: config.browserSync.server
 	});
 
-	gulp.watch(config.styles.sources, ['styles']);
-	gulp.watch(config.scripts.sources, ['scripts']);
+	gulp.watch(config.styles.source, ['styles']);
+	gulp.watch(config.scripts.source, ['scripts', browserSync.reload]);
 });
 
 gulp.task('build', [
 	'clean',
 	'styles',
-	'scripts'
+	'scripts',
+	'modules'
 ]);
